@@ -21,13 +21,17 @@ option objc_class_prefix = "HLW";
 
 package webpage;
 
-service Publish {
-  rpc PublishRichText (SuperPage) returns (Result) {}
+service Page {
+  rpc PublishSuperPage (SuperPage) returns (Result) {}
 }
 
 message SuperPage {
   int64 id = 1;
   string body = 2;
+
+  bool edit_originals = 3;
+  bool reference_original = 4;
+  bool just_edit = 5;
 }
 
 message Result {
