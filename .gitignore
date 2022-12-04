@@ -9,3 +9,5 @@
 .history
 .ionide
 
+### Package ###
+*.egg-info
