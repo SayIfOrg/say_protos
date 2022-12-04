@@ -1,0 +1,11 @@
+### Pycharm ###
+.idea
+
+### VisualStudioCode ###
+.vscode
+# Built Visual Studio Code Extensions
+*.vsix
+# Ignore all local history of files
+.history
+.ionide
+
