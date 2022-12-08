@@ -10,6 +10,7 @@ setup(
     author_email="eng.amir.bu@gmail.com",
     py_modules=find_packages(),
     install_requires=[
-        "grpcio==1.50",
+        "grpcio>=1.50,<1.51"
+        "grpcio-tools>=1.50,<1.51"
     ],
 )
