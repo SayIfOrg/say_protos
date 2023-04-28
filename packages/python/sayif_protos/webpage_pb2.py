@@ -13,14 +13,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rwebpage.proto\x12\x07webpage\"1\n\tInstances\x12$\n\tinstances\x18\x01 \x03(\x0b\x32\x11.webpage.Instance\"3\n\x08Instance\x12\n\n\x02id\x18\x01 \x01(\x03\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\"&\n\x05Token\x12\r\n\x05token\x18\x01 \x01(\t\x12\x0e\n\x06\x63ommit\x18\x02 \x01(\x08\"#\n\x07Project\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x0c\n\x04name\x18\x02 \x01(\t\"}\n\tSuperPage\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x03\x12\n\n\x02id\x18\x02 \x01(\x03\x12\x0c\n\x04\x62ody\x18\x03 \x01(\t\x12\x16\n\x0e\x65\x64it_originals\x18\x04 \x01(\x08\x12\x1a\n\x12reference_original\x18\x05 \x01(\x08\x12\x11\n\tjust_edit\x18\x06 \x01(\x08\"\x19\n\x06Result\x12\x0f\n\x07message\x18\x01 \x01(\t2A\n\x04Page\x12\x39\n\x10PublishSuperPage\x12\x12.webpage.SuperPage\x1a\x0f.webpage.Result\"\x00\x32\xb7\x01\n\x0eManageInstance\x12\x33\n\rValidateToken\x12\x0e.webpage.Token\x1a\x10.webpage.Project\"\x00\x12\x36\n\x0cInstanceList\x12\x10.webpage.Project\x1a\x12.webpage.Instances\"\x00\x12\x38\n\x0eInstanceDetail\x12\x11.webpage.Instance\x1a\x11.webpage.Instance\"\x00\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rwebpage.proto\x12\x07webpage\"1\n\tInstances\x12$\n\tinstances\x18\x01 \x03(\x0b\x32\x11.webpage.Instance\"3\n\x08Instance\x12\n\n\x02id\x18\x01 \x01(\x03\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\"&\n\x05Token\x12\r\n\x05token\x18\x01 \x01(\t\x12\x0e\n\x06\x63ommit\x18\x02 \x01(\x08\"#\n\x07Project\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x0c\n\x04name\x18\x02 \x01(\t\"}\n\tSuperPage\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x03\x12\n\n\x02id\x18\x02 \x01(\x03\x12\x0c\n\x04\x62ody\x18\x03 \x01(\t\x12\x16\n\x0e\x65\x64it_originals\x18\x04 \x01(\x08\x12\x1a\n\x12reference_original\x18\x05 \x01(\x08\x12\x11\n\tjust_edit\x18\x06 \x01(\x08\"\x19\n\x06Result\x12\x0f\n\x07message\x18\x01 \x01(\t2A\n\x04Page\x12\x39\n\x10PublishSuperPage\x12\x12.webpage.SuperPage\x1a\x0f.webpage.Result\"\x00\x32\xb7\x01\n\x0eManageInstance\x12\x33\n\rValidateToken\x12\x0e.webpage.Token\x1a\x10.webpage.Project\"\x00\x12\x36\n\x0cInstanceList\x12\x10.webpage.Project\x1a\x12.webpage.Instances\"\x00\x12\x38\n\x0eInstanceDetail\x12\x11.webpage.Instance\x1a\x11.webpage.Instance\"\x00\x42\x62\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01Z*github.com/SayIfOrg/say_protos/packages/go\xa2\x02\x03HLWb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'webpage_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'\n\033io.grpc.examples.helloworldB\017HelloWorldProtoP\001\242\002\003HLW'
+  DESCRIPTOR._serialized_options = b'\n\033io.grpc.examples.helloworldB\017HelloWorldProtoP\001Z*github.com/SayIfOrg/say_protos/packages/go\242\002\003HLW'
   _INSTANCES._serialized_start=26
   _INSTANCES._serialized_end=75
   _INSTANCE._serialized_start=77
