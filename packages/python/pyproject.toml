@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "sayif-protos"
+version = "0.1.0"
+description = "The shared grpc stub packages provided in different programming languages for SayIf services"
+authors = ["Amir Khalife <eng.amir.bu@gmail.com>"]
+license = "LGPL-3.0-or-later"
+repository = "https://github.com/SayIfOrg/say_protos"
+packages = [{include = "sayif_protos"}]
+
+    [tool.poetry.dependencies]
+    python = "~3.9 || ~3.10 || ~3.11"
+    grpcio = "~1.50"
+    grpcio-tools = "~1.50"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
