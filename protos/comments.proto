@@ -2,7 +2,8 @@ syntax = "proto3";
 option go_package = "github.com/SayIfOrg/say_protos/packages/go";
 
 service Commenting {
-  rpc Post (Comment) returns (Comment) {}
+  rpc Post (PostComment) returns (Comment) {}
+  rpc Get (GetParams) returns (Comment) {}
 }
 message Comment {
   uint64 id=1;
@@ -10,4 +11,13 @@ message Comment {
   uint64 user_id=2;
   uint64 reply_to_id=3;
   string content = 4;
+}
+message PostComment {
+  string outer_identifier=5;
+  uint64 user_id=2;
+  string reply_to_outer_identifier=3;
+  string content = 4;
+}
+message GetParams {
+  string outer_identifier=1;
 }

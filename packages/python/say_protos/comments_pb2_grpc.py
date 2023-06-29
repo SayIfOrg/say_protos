@@ -16,7 +16,12 @@ class CommentingStub(object):
         """
         self.Post = channel.unary_unary(
                 '/Commenting/Post',
-                request_serializer=comments__pb2.Comment.SerializeToString,
+                request_serializer=comments__pb2.PostComment.SerializeToString,
+                response_deserializer=comments__pb2.Comment.FromString,
+                )
+        self.Get = channel.unary_unary(
+                '/Commenting/Get',
+                request_serializer=comments__pb2.GetParams.SerializeToString,
                 response_deserializer=comments__pb2.Comment.FromString,
                 )
 
@@ -30,12 +35,23 @@ class CommentingServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Get(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_CommentingServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Post': grpc.unary_unary_rpc_method_handler(
                     servicer.Post,
-                    request_deserializer=comments__pb2.Comment.FromString,
+                    request_deserializer=comments__pb2.PostComment.FromString,
+                    response_serializer=comments__pb2.Comment.SerializeToString,
+            ),
+            'Get': grpc.unary_unary_rpc_method_handler(
+                    servicer.Get,
+                    request_deserializer=comments__pb2.GetParams.FromString,
                     response_serializer=comments__pb2.Comment.SerializeToString,
             ),
     }
@@ -60,7 +76,24 @@ class Commenting(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Commenting/Post',
-            comments__pb2.Comment.SerializeToString,
+            comments__pb2.PostComment.SerializeToString,
+            comments__pb2.Comment.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Get(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Commenting/Get',
+            comments__pb2.GetParams.SerializeToString,
             comments__pb2.Comment.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

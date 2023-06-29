@@ -22,7 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CommentingClient interface {
-	Post(ctx context.Context, in *Comment, opts ...grpc.CallOption) (*Comment, error)
+	Post(ctx context.Context, in *PostComment, opts ...grpc.CallOption) (*Comment, error)
+	Get(ctx context.Context, in *GetParams, opts ...grpc.CallOption) (*Comment, error)
 }
 
 type commentingClient struct {
@@ -33,9 +34,18 @@ func NewCommentingClient(cc grpc.ClientConnInterface) CommentingClient {
 	return &commentingClient{cc}
 }
 
-func (c *commentingClient) Post(ctx context.Context, in *Comment, opts ...grpc.CallOption) (*Comment, error) {
+func (c *commentingClient) Post(ctx context.Context, in *PostComment, opts ...grpc.CallOption) (*Comment, error) {
 	out := new(Comment)
 	err := c.cc.Invoke(ctx, "/Commenting/Post", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentingClient) Get(ctx context.Context, in *GetParams, opts ...grpc.CallOption) (*Comment, error) {
+	out := new(Comment)
+	err := c.cc.Invoke(ctx, "/Commenting/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +56,8 @@ func (c *commentingClient) Post(ctx context.Context, in *Comment, opts ...grpc.C
 // All implementations must embed UnimplementedCommentingServer
 // for forward compatibility
 type CommentingServer interface {
-	Post(context.Context, *Comment) (*Comment, error)
+	Post(context.Context, *PostComment) (*Comment, error)
+	Get(context.Context, *GetParams) (*Comment, error)
 	mustEmbedUnimplementedCommentingServer()
 }
 
@@ -54,8 +65,11 @@ type CommentingServer interface {
 type UnimplementedCommentingServer struct {
 }
 
-func (UnimplementedCommentingServer) Post(context.Context, *Comment) (*Comment, error) {
+func (UnimplementedCommentingServer) Post(context.Context, *PostComment) (*Comment, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Post not implemented")
+}
+func (UnimplementedCommentingServer) Get(context.Context, *GetParams) (*Comment, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedCommentingServer) mustEmbedUnimplementedCommentingServer() {}
 
@@ -71,7 +85,7 @@ func RegisterCommentingServer(s grpc.ServiceRegistrar, srv CommentingServer) {
 }
 
 func _Commenting_Post_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Comment)
+	in := new(PostComment)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -83,7 +97,25 @@ func _Commenting_Post_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: "/Commenting/Post",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentingServer).Post(ctx, req.(*Comment))
+		return srv.(CommentingServer).Post(ctx, req.(*PostComment))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Commenting_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentingServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Commenting/Get",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentingServer).Get(ctx, req.(*GetParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -98,6 +130,10 @@ var Commenting_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Post",
 			Handler:    _Commenting_Post_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _Commenting_Get_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
